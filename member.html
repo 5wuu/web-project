@@ -37,10 +37,10 @@
             
           </nav>
           <h1 class="store-name"><a href="index .html">胖呆雜貨店</a></h1>
-          <div class="nav-right">
-            <a href=#>黃胖呆，您好 ｜</a>
-            <a href="shoppingcart.html" class="cart">🛒 購物車</a>
-          </div>
+            <div class="nav-right">
+             <a id="member-greeting">會員中心 ｜</a>
+             <a href="shoppingcart.html" class="cart">🛒 購物車</a>
+            </div>
         </div>
     </header>
 
@@ -112,10 +112,19 @@
               <span class="review-date">2024/12/30</span>
             </div>
           </div>
-          
         </section>
       </div>
-    </main>
+<div id="member-benefits" style="display: none; background-color:#fff0f5; padding: 20px; margin: 20px; border-radius: 10px;">
+  <h2>🎉 會員專屬優惠</h2>
+  <ul>
+    <li>🎁 註冊會員即贈 <strong>100元購物金</strong></li>
+    <li>🎉 消費滿 1000 元享 <strong>9 折優惠</strong></li>
+    <li>📦 本週限時 <strong>全館免運</strong></li>
+  </ul>
+</div>
+
+  </main>
+
     <footer>
       <div class="footer-container">
         <div class="footer-item">
@@ -135,5 +144,25 @@
     <script src="js/member_center.js"></script>
     <script src="js/test.js"></script>
     <script src="js/product-detail.js"></script>
+<script>
+  const currentUser = localStorage.getItem("current_user");
+
+  if (currentUser) {
+    const greeting = document.getElementById("member-greeting");
+    if (greeting) {
+      greeting.textContent = `${currentUser}，您好｜`;
+    }
+
+    const benefits = document.getElementById("member-benefits");
+    if (benefits) {
+      benefits.style.display = "block";
+    }
+  } else {
+    // 如果沒登入跳轉回首頁或提醒
+    alert("請先登入會員！");
+    window.location.href = "index.html";
+  }
+</script>
+
 </body>
 </html>

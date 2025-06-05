@@ -490,3 +490,4 @@ document.addEventListener("DOMContentLoaded", function () {
     alert('評論已提交！');  // 這只是一個簡單的提示框，實際使用中可以替換成提交評論的代碼
   });
 });
+

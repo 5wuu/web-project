@@ -37,19 +37,52 @@
           <h1 class="store-name"><a href="index .html">胖呆雜貨店</a></h1>
           <div class="nav-right">
           
-            <!-- 會員中心 -->
-            <a href="#" id="member-center" onclick="openLoginWindow()">會員中心 ｜</a>
+            <!-- header 裡的會員中心區塊改為下拉選單 -->
+<div class="dropdown">
+  <a href="#" class="dropdown-button" onclick="toggleMemberMenu()" id="member-button">會員中心 ▼</a>
+  <div id="member-menu" class="dropdown-content">
+    <a href="#" onclick="openLoginWindow()">會員登入</a>
+    <a href="#" onclick="openRegisterWindow()">新用戶註冊</a>
+  </div>
+</div>
+
+
+         <!-- 🔽 新用戶註冊視窗 -->
+<div id="register-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeRegisterWindow()">&times;</span>
+    <h2>新用戶註冊</h2>
+    <form id="register-form">
+      <label for="name">姓名：</label>
+      <input type="text" id="name" name="name" required><br>
+      <label for="phone">電話：</label>
+      <input type="tel" id="phone" name="phone" required><br>
+      <label for="email">Email：</label>
+      <input type="email" id="email" name="email" required><br>
+      <label for="register-username">帳號：</label>
+      <input type="text" id="register-username" name="username" required><br>
+
+      <label for="register-password">密碼：</label>
+      <input type="password" id="register-password" name="password" required><br>
+
+      <button type="submit">註冊</button>
+    </form>
+    <p id="register-success" style="color: green; display: none;">註冊成功，歡迎選購！</p>
+  </div>
+</div>
+
+
 
             <!-- 登入視窗 -->
             <div id="login-modal" class="modal">
               <div class="modal-content">
                 <span class="close" onclick="closeLoginWindow()">&times;</span>
-                <h2>登入會員</h2>
+                <h2>會員登入</h2>
                 <form id="login-form">
                   <label for="username">帳號:</label>
-                  <input type="text" id="username" name="username" required><br>
+                  <input type="text" id="login-username" name="username" required><br>
                   <label for="password">密碼:</label>
-                  <input type="password" id="password" name="password" required><br>
+                  <input type="password" id="login-password" name="password" required><br>
                   <button type="submit">登入</button>
                 </form>
                 <p id="error-message" style="color: red; display: none;">帳號或密碼錯誤！</p>
@@ -196,6 +229,70 @@
         });
       });
   </script>
+  <script>
+function toggleMemberMenu() {
+  document.getElementById("member-menu").classList.toggle("show");
+}
+function openRegisterWindow() {
+  document.getElementById("register-modal").style.display = "block";
+}
+function closeRegisterWindow() {
+  document.getElementById("register-modal").style.display = "none";
+}
+function openLoginWindow() {
+  document.getElementById("login-modal").style.display = "block";
+}
+function closeLoginWindow() {
+  document.getElementById("login-modal").style.display = "none";
+}
+document.getElementById("register-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const username = document.getElementById("register-username").value;
+  const password = document.getElementById("register-password").value;
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const email = document.getElementById("email").value;
+  const user = { username, password, name, phone, email };
+  localStorage.setItem("user_" + username, JSON.stringify(user));
+  document.getElementById("register-success").style.display = "block";
+  setTimeout(() => {
+    closeRegisterWindow();
+    document.getElementById("register-form").reset();
+    document.getElementById("register-success").style.display = "none";
+  }, 2000);
+});
+document.getElementById("login-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const username = document.getElementById("login-username").value;
+  const password = document.getElementById("login-password").value;
+  const data = localStorage.getItem("user_" + username);
+  const errorMessage = document.getElementById("error-message");
+  if (!data) {
+    errorMessage.textContent = "尚未註冊！";
+    errorMessage.style.display = "block";
+    return;
+  }
+  const user = JSON.parse(data);
+  if (user.password !== password) {
+    errorMessage.textContent = "帳號或密碼錯誤！";
+    errorMessage.style.display = "block";
+    return;
+  }
+
+  localStorage.setItem("current_user", user.name);
+
+  alert("登入成功，歡迎 " + user.name + "！");
+  closeLoginWindow();
+  document.getElementById("login-form").reset();
+  errorMessage.style.display = "none";
+
+  const memberButton = document.getElementById("member-button");
+  if (memberButton) {
+    memberButton.innerText = user.name + "，您好 ▼";
+  }
+});
+</script>
+
  
 
 </body>

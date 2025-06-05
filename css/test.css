@@ -73,6 +73,15 @@ header {
   display: inline-block;
 }
 
+/* 會員中心按鈕樣式 */
+.dropdown-button {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 10px;
+  font-family: "微軟正黑體";
+}
+
 /* 隱藏的下拉內容 */
 .dropdown-content {
   display: none;
@@ -80,36 +89,30 @@ header {
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 999;
   font-family: "微軟正黑體";
+  border-radius: 6px;
 }
 
 /* 下拉選項的樣式 */
 .dropdown-content a {
-  color: black;
+  color: #333;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  transition: background-color 0.3s ease;
 }
 
+/* 滑鼠懸停樣式 */
 .dropdown-content a:hover {
   background-color: #f1f1f1;
 }
 
-/* 當選單顯示時的樣式 */
-.dropdown-content.show {
+/* 滑過 dropdown 顯示選單 */
+.dropdown:hover .dropdown-content {
   display: block;
 }
 
-/* 當滑鼠懸停時改變背景顏色 */
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
-
-/* 顯示下拉內容 */
-.show {
-  display: block;
-}
  
 .nav a {
   color: white;
