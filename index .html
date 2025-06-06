@@ -18,6 +18,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div id="ad-overlay" class="overlay">
+  <div class="popup-ad">
+  <span class="close-btn" onclick="closeAd()">&times;</span>
+  <a id="popup-ad-link" href="#">
+    <div class="popup-img-wrapper">
+      <img id="popup-ad-img" src="" alt="廣告圖片">
+      <div class="popup-ad-text">🎉全館免運 + 滿千折百！🎉</div>
+    </div>
+  </a>
+</div>
+</div>
     <header>
         <div class="header-container">
           <nav class="nav-left">
@@ -97,8 +108,13 @@
       
 
     <main>
-  
           <!-- 首頁 Banner -->
+
+          <!-- 🎉 特惠跑馬燈 -->
+        <div class="marquee">
+          <p>🎉 本週特惠：全館免運＋滿千享9折優惠，再送100元購物金！快來搶購口紅糖、蜜豆奶、彈珠汽水、懷舊零食等超人氣商品！🎉🎁🎈🛒🧸🎯🎮</p>
+        </div>
+
         <div class="slideshow-container">
           <div class="mySlides fade">
             <a href="project.html"><img src="image/photo7.jpg" width="100%" height="100%"></a>
@@ -124,7 +140,7 @@
           <span class="dot" onclick="currentSlide(1)"></span>
           <span class="dot" onclick="currentSlide(2)"></span>
         </div>
-    
+
 
         <!-- 商品列表 -->
         <section class="products" id="favorite-products">
@@ -293,7 +309,45 @@ document.getElementById("login-form").addEventListener("submit", function (e) {
 });
 </script>
 
- 
+<script>
+  const ads = [
+    { img: "image/food/chocolate.png", link: "food.html?id=food1" },
+    { img: "image/food/lipstick.png", link: "food.html?id=food1" },
+    { img: "image/food/AirplaneBiscuits.png", link: "food.html?id=food1" },
+    { img: "image/food/GummyCandy.png", link: "food.html?id=food1" },
+    { img: "image/food/HawthornGrain.png", link: "food.html?id=food1" },
+    { img: "image/food/SpiralCookies.png", link: "food.html?id=food1" },
 
+    { img: "image/drinks/MarbleSoda.PNG", link: "drinks.html?id=drinks2" },
+    { img: "image/drinks/AsparagusJuice.png", link: "drinks.html?id=drinks2" },
+    { img: "image/drinks/IceCreamSoda.png", link: "drinks.html?id=drinks2" },
+    { img: "image/drinks/QOO.png", link: "drinks.html?id=drinks2" },
+    { img: "image/drinks/soymilk.png", link: "drinks.html?id=drinks2" },
+    { img: "image/drinks/WhiteGourdTea.png", link: "drinks.html?id=drinks2" },
+
+    { img: "image/supplies/FootMassager.PNG", link: "supplies.html?id=supplies3" },
+    { img: "image/supplies/FeatherDust.PNG", link: "supplies.html?id=supplies3" },
+    { img: "image/supplies/FloridaWater.PNG", link: "supplies.html?id=supplies3" },
+    { img: "image/supplies/RootOfMoghania.PNG", link: "supplies.html?id=supplies3" },
+    { img: "image/supplies/scratch.PNG", link: "supplies.html?id=supplies3" },
+    { img: "image/supplies/SxrapingBoard.PNG", link: "supplies.html?id=supplies3" },
+
+    { img: "image/toys/SpaceBalloon.PNG", link: "toys.html?id=toys4" },
+    { img: "image/toys/PokingLottery.PNG", link: "toys.html?id=toys4" },
+    { img: "image/toys/kendama.PNG", link: "toys.html?id=toys4" },
+    { img: "image/toys/hopter.PNG", link: "toys.html?id=toys4" },
+    { img: "image/toys/draw.PNG", link: "toys.html?id=toys4" },
+    { img: "image/toys/FishingGame.PNG", link: "toys.html?id=toys4" }
+  ];
+
+  const randomAd = ads[Math.floor(Math.random() * ads.length)];
+  document.getElementById("popup-ad-img").src = randomAd.img;
+  document.getElementById("popup-ad-link").href = randomAd.link;
+  document.getElementById("ad-description").textContent = randomAd.desc;
+
+  function closeAd() {
+    document.getElementById("ad-overlay").style.display = "none";
+  }
+</script>
 </body>
 </html>
